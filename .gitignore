@@ -1,0 +1,12 @@
+# DEFAULT IGNORES
+*.DS_Store
+*.project
+*.kanban-life.code-workspace
+# NODE IGNORES
+# Dependency directories
+*node_modules/
+# Optional npm cache directory
+*.npm
+# dotenv environment variables file
+*.env
+*_rsa*
