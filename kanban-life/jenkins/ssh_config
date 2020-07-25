@@ -1,0 +1,4 @@
+Host github.com
+  Hostname ssh.github.com
+  port 443
+  IdentityFile /var/jenkins_home/.ssh/jenkins_rsa

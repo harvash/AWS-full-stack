@@ -1,0 +1,18 @@
+- name: Create Azure Kubernetes Service
+  hosts: localhost
+  connection: local
+  vars:
+    resource_group: FSKubeRG
+    location: eastus
+    aks_name: FSKubeCluster
+    CLIENT_ID: "84927229-0c5a-413a-9334-deb622211e31"
+    CLIENT_SECRET: "*zEA{iFYSJEd[4i*z?u_oe])q2hQD0zy"
+    TENANT_ID: "4c25b8a6-17f7-46f9-83f0-54734ab81fb1"
+    AZURE_SUBSCRIPTION_ID: "57db1d00-01f8-4538-b56d-647aa491bcc3"
+    aks_version: aks_version
+  tasks:
+    - name: Get a list of all pods from any namespace
+      k8s_info:
+        kind: Deployment
+      register: pod_list
+    - debug: var=pod_list.name

@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins
+spec:
+  type: LoadBalancer
+  selector:
+    app: jenkins
+    tier: frontend
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+spec:
+  selector: 
+    matchLabels:
+      app: jenkins
+      tier: frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jenkins
+        tier: frontend
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+      - name: jenkinsci
+        image: fskubecr.azurecr.io/jenkins:v1
+        imagePullPolicy: Always
+        ports:
+        - name: jenkins
+          containerPort: 8080
+        volumeMounts:
+        - name: jenkins-pvc
+          mountPath: "/var/jenkins_home"
+        - name: ssh-keys
+          readOnly: true
+          mountPath: /etc/ssh-keys
+      volumes:
+        - name: jenkins-pvc
+          persistentVolumeClaim:
+            claimName: kanban-jenkins-pv
+        - name: ssh-keys
+          secret:
+            secretName: ssh-key-secret
+        
+        
+        
+  
+
+  

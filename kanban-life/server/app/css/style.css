@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  text-align: center;
+  background-color: lightgray;
+  letter-spacing: 1px;
+  height: 12em;
+  padding: 2em 10%;
+  background-repeat: no-repeat;
+}
+
+h1 {
+  display: inline;
+  color: #7cb45b;
+  padding: 25px;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+  border: 5px solid #7cb45b;
+  border-radius: 25px;
+  box-shadow: 5px 5px 5px #828282; 
+  vertical-align: middle;
+}
+
+a:link {
+  text-decoration: none;
+  display: inline-block;
+  width: 300px;
+  color:green;
+  padding: 10px 0px 10px 10px;
+  background-color: lightgray;
+  border-radius: 25px;
+  margin: 0 0 3px 0;
+}
+
+a:visited {
+  text-decoration: none;
+  display: inline-block;
+  width: 300px;
+  color:green;
+  padding: 10px 0px 10px 10px;
+  background-color: lightgray;
+  border-radius: 25px;
+  margin: 0 0 3px 0;
+}
+
+a:hover {
+  text-decoration: none;
+  display: inline-block;
+  width: 300px;
+  padding: 5px;
+  color:lightgray;
+  padding: 10px 0px 10px 10px;
+  background-color: green;
+  border-radius: 25px;
+  margin: 0 0 3px 0;
+}
+
+li.boards {
+  list-style-type: none;
+}
+
+.figure {
+  vertical-align:middle;
+}
+
+/* Style the header */
+.header {
+  background-color: #82e96d;
+  padding: 20px;
+  text-align: center;
+}
+
+.highlight {
+  background-image: url('sticky.png');
+}
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 100%;
+  padding: 15px;
+  min-height: 300px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.footer {
+  background-color: #E8DAEF ;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width:600px) {
+  .column {
+    width: 100%;
+  }
+}

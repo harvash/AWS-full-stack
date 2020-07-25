@@ -1,0 +1,86 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css"   href="style.css">
+
+<script>
+  // Initialize socket connection for clients
+  var socket = io.connect('/');
+
+  // Initialize board display on new connect
+  socket.on('initial boards', function(data) {
+    var html = ''
+    for (var i = 0; i < data.length; i++){
+      html += "<li class='boards'><a href='#'>" + data[i].kb_name + "</a></li>"
+    }
+    $('#boards').html(html)
+    console.log('Initial row data: ', data)
+  });
+
+  // New board has been emitted, add to board selections
+  socket.on('new board', function(data) {
+    $('#boards').append("<li class='boards'><a href='#'>" + data + "</a></li>")
+  })
+  
+  // gather connected user count
+  socket.on('stats', function(data) {
+    $('#usersConnected').html('Users connected: ' + data)
+    console.log('Connected clients:', data);
+  });
+
+</script>
+<body>
+<header>
+  <img src='sticky.png' style="width: 60px;height:60px;" >
+   <h1>Kanban Life </h1>
+</header>
+
+<div class='row'>
+  <div class='column' id='kaban-list'>
+    <h3> List of Kanban Boards</h3>
+  <menu>
+    <button id="updateDetails">Add New Board</button>
+  </menu>
+    <div id='boards'></div>
+  </div>
+</div>
+
+<div class='footer' id='usersConnected'></div>
+
+  <!-- New Kanban Board dialog -->
+<dialog id="kb-dialog">
+  <form method="dialog">
+    <p><label>Enter name for new Kanban Board:
+      <input type="text" id="newKbName">
+    </label></p>
+    <menu>
+      <button value="cancel">Cancel</button>
+      <button id="confirmBtn" value="default">Confirm</button>
+    </menu>
+  </form>
+</dialog>
+
+<script>
+  var updateButton = document.getElementById('updateDetails');
+  var kbDialog = document.getElementById('kb-dialog');
+  var outputBox = document.getElementById('boards');
+  var newKbName = document.getElementById('newKbName');
+  var confirmBtn = document.getElementById('confirmBtn');
+
+  // "Update details" button opens the <dialog> modally
+  updateButton.addEventListener('click', function onOpen() {
+    if (typeof kbDialog.showModal === "function") {
+      kbDialog.showModal();
+    } else {
+      alert("The <dialog> API is not supported by this browser");
+    }
+  });
+  
+  // "Confirm" button of form triggers "close" on dialog because of [method="dialog"]
+  kbDialog.addEventListener('close', function onClose() {
+    console.log(newKbName.value)
+    socket.emit('new board', newKbName.value)
+    //$('#boards').append("<li class='boards'><a href='#'>" + newKbName.value + "</a></li>")
+  });
+</script>
+</body>

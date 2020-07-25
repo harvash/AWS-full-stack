@@ -1,0 +1,4 @@
+FROM dpage/pgadmin4:latest
+LABEL maintainer="Harvash <harvash2004@yahoo.com>"
+
+COPY ./pgadminServers.json /pgadmin4/

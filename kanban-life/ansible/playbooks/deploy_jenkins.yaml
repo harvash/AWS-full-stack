@@ -1,0 +1,24 @@
+- name: Deploy Jenkins for CI/CD work
+  hosts: localhost
+  connection: local
+  vars_files:
+    - vars/kanban-vars.yaml
+  vars:
+    resource_group: FSKubeRG
+    location: eastus
+    aks_name: FSKubeCluster
+    aks_version: aks_version
+  tasks:
+    - name: create jenkins namespace
+      k8s:
+        kind: Namespace
+        api_version: v1
+        name: jenkins
+        state: present
+
+    - name: deploy jenkins application
+      k8s:
+        namespace: jenkins
+        state: present
+        definition: "{{ lookup('file', '../../k8s/deploy_jenkins.yaml') }}"
+        

@@ -1,0 +1,16 @@
+FROM postgres:12
+LABEL maintainer="Harvash <harvash2004@yahoo.com>"
+
+ENV PG_MAJOR 12
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends && \
+    mkdir /logs && chown -R postgres:postgres /logs && \
+    mkdir /data && chown -R postgres:postgres /data
+
+WORKDIR /docker-entrypoint-initdb.d
+
+USER postgres
+
+COPY --chown=postgres:postgres ./provision/* ./
+
