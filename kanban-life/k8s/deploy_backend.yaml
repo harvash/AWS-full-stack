@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
       - name: kanban-pg
-        image: fskubecr.azurecr.io/kanban-pg
+        image: 764625898828.dkr.ecr.us-west-2.amazonaws.com/kanban-ecr:kanban-pg
         imagePullPolicy: Always
         ports:
         - name: postgres
@@ -52,7 +52,7 @@ spec:
       initContainers:
       - name: volume-mount-hack
         image: busybox
-        command: ["sh", "-c", "chown -R 999:999 /data"]
+        command: ["sh", "-c", "chmod 777 /data && chown -R 999:999 /data"]
         volumeMounts:
         - name: data
           mountPath: /data

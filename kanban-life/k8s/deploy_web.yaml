@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: kanban-web
-        image: fskubecr.azurecr.io/kanban-web:latest
+        image: 764625898828.dkr.ecr.us-west-2.amazonaws.com/kanban-ecr:kanban-web
         imagePullPolicy: Always
         ports:
           - containerPort: 4001

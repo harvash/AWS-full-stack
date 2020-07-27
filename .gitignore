@@ -10,3 +10,4 @@
 # dotenv environment variables file
 *.env
 *_rsa*
+*.kanbanNodeSSH.pem

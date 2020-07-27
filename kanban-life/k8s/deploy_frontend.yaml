@@ -8,7 +8,7 @@ spec:
     app: pgadmin
     tier: frontend
   ports:
-  - port: 5051
+  - port: 80
     targetPort: 80
 ---
 apiVersion: apps/v1
@@ -29,12 +29,14 @@ spec:
     spec:
       containers:
       - name: kanban-db-admin
-        image: fskubecr.azurecr.io/kanban-db-admin:latest
+        image: 764625898828.dkr.ecr.us-west-2.amazonaws.com/kanban-ecr:kanban-pgadmin
         imagePullPolicy: Always
         ports:
-          - containerPort: 5050
+          - containerPort: 80
         env:
-        - name: PGADMIN_DEFAULT_EMAIL
-          value: pgadmin4@pgadmin.org
-        - name: PGADMIN_DEFAULT_PASSWORD
-          value: admin
+          - name: PGADMIN_DEFAULT_EMAIL
+            value: "pgadmin"
+          - name: PGADMIN_DEFAULT_PASSWORD
+            value: "pgadmin"
+          - name: PGADMIN_LISTEN_PORT
+            value: "80"
