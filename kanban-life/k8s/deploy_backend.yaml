@@ -31,8 +31,10 @@ spec:
     spec:
       containers:
       - name: kanban-pg
-        image: 764625898828.dkr.ecr.us-west-2.amazonaws.com/kanban-ecr:kanban-pg
-        imagePullPolicy: Always
+        #image: 764625898828.dkr.ecr.us-west-2.amazonaws.com/kanban-ecr:kanban-pg
+        #imagePullPolicy: Always
+        image: kanban-pg
+        imagePullPolicy: Never
         ports:
         - name: postgres
           containerPort: 5432

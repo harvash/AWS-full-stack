@@ -5,8 +5,9 @@
 
 <script>
   // Initialize socket connection for clients
-  var socket = io.connect('/');
+  var socket = io.connect('/', {'force new connection': true});
 
+  
   // Initialize board display on new connect
   socket.on('initial boards', function(data) {
     var html = ''
