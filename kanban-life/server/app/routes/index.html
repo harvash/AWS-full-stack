@@ -5,11 +5,11 @@
 
 <script>
   // Initialize socket connection for clients
-  var socket = io.connect('/', {'force new connection': true});
+  var socket = io.connect('/');
 
   
   // Initialize board display on new connect
-  socket.on('initial boards', function(data) {
+  socket.on('boards', function(data) {
     var html = ''
     for (var i = 0; i < data.length; i++){
       html += "<li class='boards'><a href='#'>" + data[i].kb_name + "</a></li>"
@@ -17,11 +17,6 @@
     $('#boards').html(html)
     console.log('Initial row data: ', data)
   });
-
-  // New board has been emitted, add to board selections
-  socket.on('new board', function(data) {
-    $('#boards').append("<li class='boards'><a href='#'>" + data + "</a></li>")
-  })
   
   // gather connected user count
   socket.on('stats', function(data) {
@@ -77,11 +72,10 @@
     }
   });
   
-  // "Confirm" button of form triggers "close" on dialog because of [method="dialog"]
-  kbDialog.addEventListener('close', function onClose() {
+  // 
+  confirmBtn.addEventListener('click', function() {
     console.log(newKbName.value)
     socket.emit('new board', newKbName.value)
-    //$('#boards').append("<li class='boards'><a href='#'>" + newKbName.value + "</a></li>")
   });
 </script>
 </body>

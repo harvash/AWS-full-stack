@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: kanban-life
+  name: kanban-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kanban-web
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: kanban-web
+        tier: frontend
+    spec:
+      containers:
+        - name: kanban-web
+          # image: 764625898828.dkr.ecr.us-west-2.amazonaws.com/kanban-ecr:kanban-web
+          # imagePullPolicy: Always
+          image: kanban-web
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 4001
+          env:
+          - name: DB_HOST
+            value: postgres
+          - name: DB_USER
+            value: postgres
+          - name: DB_PASS
+            value: changeme
+          - name: DB_NAME
+            value: pgkanban

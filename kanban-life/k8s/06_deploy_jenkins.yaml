@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: kanban-life
   name: jenkins
 spec:
   selector: 
@@ -17,22 +18,24 @@ spec:
       securityContext:
         fsGroup: 1000
       containers:
-      - name: jenkinsci
-        image: fskubecr.azurecr.io/jenkins:v1
-        imagePullPolicy: Always
-        ports:
-        - name: jenkins
-          containerPort: 8080
-        volumeMounts:
-        - name: jenkins-pvc
-          mountPath: "/var/jenkins_home"
-        - name: ssh-keys
-          readOnly: true
-          mountPath: /etc/ssh-keys
+        - name: jenkinsci
+          # image: fskubecr.azurecr.io/jenkins:v1
+          # imagePullPolicy: Always
+          image: jenkins
+          imagePullPolicy: Never
+          ports:
+          - name: jenkins
+            containerPort: 8080
+          volumeMounts:
+          - name: jenkins-pvc
+            mountPath: "/var/jenkins_home"
+          - name: ssh-keys
+            readOnly: true
+            mountPath: /etc/ssh-keys
       volumes:
         - name: jenkins-pvc
           persistentVolumeClaim:
-            claimName: kanban-jenkins-pv
+            claimName: kanban-jenkins-pvc
         - name: ssh-keys
           secret:
             secretName: ssh-key-secret
