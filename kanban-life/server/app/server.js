@@ -24,7 +24,7 @@ app.use(require(__dirname + '/routes'))
 
 // Setup Client Counter
 var numClients = 0;
-var isInitBoards = false;
+var isInitBoards = true; // always query on connection
 var boards = [];
 
 // handle connection events
