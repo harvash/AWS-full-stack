@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: kanban-life
+  name: pgadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgadmin
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+        tier: frontend
+    spec:
+      containers:
+        - name: kanban-db-admin
+          # image: 764625898828.dkr.ecr.us-west-2.amazonaws.com/kanban-ecr:kanban-pgadmin
+          # imagePullPolicy: Always
+          image: kanban-pgadmin
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5050
+          env:
+            - name: PGADMIN_DEFAULT_EMAIL
+              value: "pgadmin"
+            - name: PGADMIN_DEFAULT_PASSWORD
+              value: "pgadmin"
+            - name: PGADMIN_LISTEN_PORT
+              value: "5050"
