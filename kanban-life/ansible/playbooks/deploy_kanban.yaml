@@ -5,6 +5,7 @@
   tasks:
     - name: deploy kanban namespace
       k8s:
+        kubeconfig: '/var/jenkins_home/.kube/kubeconfig'
         apply: yes
         definition: "{{ item }}"
       with_items: 

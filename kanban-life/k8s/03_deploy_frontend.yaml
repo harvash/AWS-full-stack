@@ -17,10 +17,17 @@ spec:
     spec:
       containers:
         - name: kanban-db-admin
-          # image: 764625898828.dkr.ecr.us-west-2.amazonaws.com/kanban-ecr:kanban-pgadmin
-          # imagePullPolicy: Always
-          image: kanban-pgadmin
-          imagePullPolicy: Never
+          resources:
+            requests:
+              memory: 500M
+              cpu: 500m
+            limits:
+              memory: 1G
+              cpu: 750m
+          image: 764625898828.dkr.ecr.us-west-2.amazonaws.com/kanban-ecr:kanban-pgadmin
+          imagePullPolicy: Always
+          # image: kanban-pgadmin
+          # imagePullPolicy: Never
           ports:
             - containerPort: 5050
           env:

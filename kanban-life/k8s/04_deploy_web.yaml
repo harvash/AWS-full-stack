@@ -17,10 +17,17 @@ spec:
     spec:
       containers:
         - name: kanban-web
-          # image: 764625898828.dkr.ecr.us-west-2.amazonaws.com/kanban-ecr:kanban-web
-          # imagePullPolicy: Always
-          image: kanban-web
-          imagePullPolicy: Never
+          resources:
+            requests:
+              memory: 500M
+              cpu: 500m
+            limits:
+              memory: 1G
+              cpu: 750m
+          image: 764625898828.dkr.ecr.us-west-2.amazonaws.com/kanban-ecr:kanban-web
+          imagePullPolicy: Always
+          # image: kanban-web
+          # imagePullPolicy: Never
           ports:
             - containerPort: 4001
           env:

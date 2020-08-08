@@ -19,26 +19,27 @@ spec:
         fsGroup: 1000
       containers:
         - name: jenkinsci
-          # image: fskubecr.azurecr.io/jenkins:v1
-          # imagePullPolicy: Always
-          image: jenkins
-          imagePullPolicy: Never
+          resources:
+            requests:
+              memory: 500M
+              cpu: 500m
+            limits:
+              memory: 1G
+              cpu: 750m
+          image: 764625898828.dkr.ecr.us-west-2.amazonaws.com/kanban-ecr:kanban-jenkins
+          imagePullPolicy: Always
+          # image: jenkins
+          # imagePullPolicy: Never
           ports:
           - name: jenkins
             containerPort: 8080
           volumeMounts:
           - name: jenkins-pvc
             mountPath: "/var/jenkins_home"
-          - name: ssh-keys
-            readOnly: true
-            mountPath: /etc/ssh-keys
       volumes:
         - name: jenkins-pvc
           persistentVolumeClaim:
             claimName: kanban-jenkins-pvc
-        - name: ssh-keys
-          secret:
-            secretName: ssh-key-secret
         
         
         

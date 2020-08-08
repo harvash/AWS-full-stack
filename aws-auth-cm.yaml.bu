@@ -11,7 +11,7 @@ data:
         - system:bootstrappers
         - system:nodes
   mapUsers: | 
-    - userarn: arn:aws:iam::764625898828:user/kanban
+    - userarn: arn:aws:iam::764625898828:user/kanban 
       username: kanban 
       groups: 
         - system:masters
