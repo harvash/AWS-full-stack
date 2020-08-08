@@ -8,6 +8,7 @@
         kubeconfig: '/var/jenkins_home/.kube/kubeconfig'
         apply: yes
         definition: "{{ item }}"
+        api_key: "{{ lookup('env','jenkins-eks-svc') }}"
       with_items: 
         - "{{ lookup('file', '../../k8s/00_namespace.yaml') }}"
         - "{{ lookup('file', '../../k8s/01_deploy_cloud_services.yaml') }}"
