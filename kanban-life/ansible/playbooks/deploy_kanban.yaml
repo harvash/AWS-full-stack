@@ -1,35 +1,15 @@
 - name: Deploy the Kanban Life Application
   hosts: localhost
   connection: local
-  vars_files:
-    - vars/kanban-vars.yaml
-  vars:
-    resource_group: FSKubeRG
-    location: eastus
-    aks_name: FSKubeCluster
-    aks_version: aks_version
+
   tasks:
-    - name: create kanban namespace
+    - name: deploy kanban namespace
       k8s:
-        kind: namespace
-        api_version: v1
-        name: kanban
-        state: present
-
-    - name: deploy kanban-pg
-      k8s:
-        namespace: kanban
         apply: yes
-        definition: "{{ lookup('file', '../../k8s/deploy_backend.yaml') }}"
-
-    - name: deploy kanban-db-admin
-      k8s:
-        namespace: kanban
-        apply: yes
-        definition: "{{ lookup('file', '../../k8s/deploy_frontend.yaml') }}"
-
-    - name: deploy kanban-app
-      k8s:
-        namespace: kanban
-        apply: yes
-        definition: "{{ lookup('file', '../../k8s/deploy_web.yaml') }}"
+        definition: "{{ item }}"
+      with_items: 
+        - "{{ lookup('file', '../../k8s/00_namespace.yaml') }}"
+        - "{{ lookup('file', '../../k8s/01_deploy_cloud_services.yaml') }}"
+        - "{{ lookup('file', '../../k8s/02_deploy_backend.yaml') }}" 
+        - "{{ lookup('file', '../../k8s/03_deploy_frontend.yaml') }}"
+        - "{{ lookup('file', '../../k8s/04_deploy_web.yaml') }}"

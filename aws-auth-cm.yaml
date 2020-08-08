@@ -5,12 +5,12 @@ metadata:
   namespace: kube-system
 data:
   mapRoles: |
-    - rolearn: arn:aws:iam::764625898828:role/kanban-iam
+    - rolearn: <ARN of instance role (not instance profile)>
       username: system:node:{{EC2PrivateDNSName}}
       groups:
         - system:bootstrappers
         - system:nodes
-  mapUsers: |
+  mapUsers: | 
     - userarn: arn:aws:iam::764625898828:user/kanban 
       username: designated_user 
       groups: 

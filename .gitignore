@@ -11,3 +11,5 @@
 *.env
 *_rsa*
 *.kanbanNodeSSH.pem
+*.aws-auth*
+*eks_kubeconfig*
